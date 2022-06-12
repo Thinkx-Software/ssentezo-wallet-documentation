@@ -25,7 +25,7 @@ for other programming languages use follow the permitted syntax respectively.
 - Endpoint.  https://wallet.ssentezo.com/api/withdraw
 - The endpoint above is accessed via the POST method with the following request body.
 NB: All requests must contain authorization header.
-## example - setting up a withdraw request.
+## Example - Setting up a withdraw request.
  ```php
    $testingPhoneNumbers = ['256770691484','256756291975','256778292573'];
     //example request body
@@ -35,7 +35,6 @@ NB: All requests must contain authorization header.
         'msisdn' => 256770691484,
         'reason' => 'your reason for the transaction',
         'currency' => 'UGX', // should be a valid ISO code and this currency should be supported by your wallet
-        'callback' => 'https://yourcallback.com/callback.php', // url to call you back on transaction success.
         'environment' => 'sandbox'
     ];
 
@@ -52,3 +51,42 @@ NB: All requests must contain authorization header.
         "environment" : "specify the environment to be utilized \"sandbox\" is the testing environment set the environment property to production or live  to enable transactions "
         }
 ```
+## Example - Success Response.
+All responses responses are json encoded strings
+```json 
+// status code 202 
+    {
+        "message": "success",
+        "data" : {
+            "externalReference" : "2391", // The reference Id you are using to reffer to this specific transaction
+            "request_id" : "b997c60c6f445185fcd9a3a595533734" , // unique id identifying this API request to our system
+            "transactionStatus" : "SUCCEEDED", 
+            "financialTransactionId" : "12282913328"  // This is the  transaction id of the from Mobile Money System
+        }
+    }
+```
+## Example - Failed Response
+```json 
+// status code 400
+    {
+        "message": "failed",
+        "data" : {
+            "externalReference" : "2381", // The reference Id you are using to reffer to this specific transaction
+            "request_id" : "b997c60c6f445185fcd9a3a595533734" , // unique id identifying this API request to our system
+            "transactionStatus" : "FAILED", 
+            "financialTransactionId" : ""  // This is the  transaction id of the from Mobile Money System
+        }
+    }
+```
+## Expected HTTP Response Codes.
+These are the possible response codes that can be received in the course of the transaction.
+|Status Code | Interpretation|
+|------------|--------------- ---------------|
+|   202      | Succeeded Transaction         |
+|------------|-------------------------------|
+|   400      | Failed Transaction            |
+|------------|-------------------------------|
+|   401      | No Authorization Header       |
+|------------|-------------------------------|
+|   403      | Invalid Credentials           |
+|------------|-------------------------------|
