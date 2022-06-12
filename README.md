@@ -64,6 +64,7 @@ All responses responses are json encoded strings
         }
     }
 ```
+NB: The financialTransactionId  is the transaction reference from the Network service provider
 ## Example - Failed Response
 ```json 
     {
@@ -86,3 +87,14 @@ These are the possible response codes that can be received in the course of the 
 |   400      | Failed Transaction            |
 |   401      | No Authorization Header       |
 |   403      | Invalid Credentials           |
+
+
+## Transaction Statuses
+These are the available transaction status that a transaction can have.
+
+|Status | Description                                                         |
+|-------------|---------------------------------------------------------------|
+|  SUCCEEDED  | Succeeded Transaction                                         |
+|   FAILED    | Failed Transaction                                            |
+|   PENDING   |  Transaction still pending                                    |
+|   INDETERMINATE     | RESPONSE NOT YET DETERMINED CONTACT SUPPORT           |
