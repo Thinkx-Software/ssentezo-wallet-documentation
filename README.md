@@ -54,27 +54,25 @@ NB: All requests must contain authorization header.
 ## Example - Success Response.
 All responses responses are json encoded strings
 ```json 
-// status code 202 
     {
         "message": "success",
         "data" : {
-            "externalReference" : "2391", // The reference Id you are using to reffer to this specific transaction
-            "request_id" : "b997c60c6f445185fcd9a3a595533734" , // unique id identifying this API request to our system
+            "externalReference" : "2391", 
+            "request_id" : "b997c60c6f445185fcd9a3a595533734" , 
             "transactionStatus" : "SUCCEEDED", 
-            "financialTransactionId" : "12282913328"  // This is the  transaction id of the from Mobile Money System
+            "financialTransactionId" : "12282913328"  
         }
     }
 ```
 ## Example - Failed Response
 ```json 
-// status code 400
     {
         "message": "failed",
         "data" : {
-            "externalReference" : "2381", // The reference Id you are using to reffer to this specific transaction
-            "request_id" : "b997c60c6f445185fcd9a3a595533734" , // unique id identifying this API request to our system
+            "externalReference" : "2381", 
+            "request_id" : "b997c60c6f445185fcd9a3a595533734" , 
             "transactionStatus" : "FAILED", 
-            "financialTransactionId" : ""  // This is the  transaction id of the from Mobile Money System
+            "financialTransactionId" : ""  
         }
     }
 ```
