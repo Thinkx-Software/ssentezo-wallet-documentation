@@ -87,6 +87,8 @@ These are the possible response codes that can be received in the course of the 
 |   400      | Failed Transaction            |
 |   401      | No Authorization Header       |
 |   403      | Invalid Credentials           |
+|  500       | An error occurred check the message|
+| 422        |  Unprocessible Entity check the request body|
 
 
 ## Transaction Statuses
