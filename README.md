@@ -77,9 +77,11 @@ All responses responses are json encoded strings
     }
 ```
 ## Expected HTTP Response Codes.
-These are the possible response codes that can be received in the course of the transaction.<br/>
+These are the possible response codes that can be received in the course of the transaction.
+
 
 |Status Code | Interpretation                |
+|------------|-------------------------------|
 |   202      | Succeeded Transaction         |
 |   400      | Failed Transaction            |
 |   401      | No Authorization Header       |
