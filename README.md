@@ -87,8 +87,8 @@ These are the possible response codes that can be received in the course of the 
 |   400      | Failed Transaction            |
 |   401      | No Authorization Header       |
 |   403      | Invalid Credentials           |
-|  500       | An error occurred check the message|
-| 422        |  Unprocessible Entity check the request body|
+|   500      | An error occurred check the message|
+|   422      |  Unprocessible Entity check the request body|
 
 
 ## Transaction Statuses
@@ -100,3 +100,38 @@ These are the available transaction status that a transaction can have.
 |   FAILED    | Failed Transaction                                            |
 |   PENDING   |  Transaction still pending                                    |
 |   INDETERMINATE     | RESPONSE NOT YET DETERMINED CONTACT SUPPORT           |
+
+# Collecting money into the wallet (Deposit)
+ - Endpoint.  https://wallet.ssentezo.com/api/deposit
+- The endpoint above is accessed via the POST method with the following request body.
+## Example - Setting up a withdraw request.
+ ```php
+   $testingPhoneNumbers = ['256770691484','256756291975','256778292573'];
+    //example request body
+
+    $requestBody => [
+        'amount' => 100,
+        'msisdn' => 256770691484,
+        'reason' => 'your reason for the transaction',
+        'currency' => 'UGX', // should be a valid ISO code and this currency should be supported by your wallet
+        'environment' => 'sandbox',
+        'callback' => 'http://yourapp.com/callbackURL',
+        'account_name' => '(Optional)' //A persons name you are collecting from
+    ];
+
+    // with php you can use curl , or Http Request 2 ,or Guzzle Http  to perform this request.
+    //To mimic responses use the provisioned testingPhoneNumbers  and eth the environment to sandbox.
+```
+## Example - Success Response.
+All responses responses are json encoded strings
+```json 
+    {
+        "message": "success",
+        "data" : {
+            "externalReference" : "2391", 
+            "request_id" : "b997c60c6f445185fcd9a3a595533734" , 
+            "transactionStatus" : "PENDING", 
+        }
+    }
+```
+NB. A PENDING status with HTTP status Code of 202 means the transaction has been initiated and the benefactor must enter their Mobile Money Pin. Once the transaction has succeeded the call back endpoint is then hit using  a <em>POST</em> request to notify you.
