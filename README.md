@@ -104,7 +104,7 @@ These are the available transaction status that a transaction can have.
 # Collecting money into the wallet (Deposit)
  - Endpoint.  https://wallet.ssentezo.com/api/deposit
 - The endpoint above is accessed via the POST method with the following request body.
-## Example - Setting up a withdraw request.
+## Example - Setting up a collection request.
  ```php
    $testingPhoneNumbers = ['256770691484','256756291975','256778292573'];
     //example request body
