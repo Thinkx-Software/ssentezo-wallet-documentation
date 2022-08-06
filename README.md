@@ -188,6 +188,16 @@ URL: https://wallet.ssentezo.com/api/get_status/{externalReference}
 ```
 if an unknown reference was passed in the URL then a 404 http status code is received with errorCode : NOT_FOUND.
 
+Incase you are in the sandbox environment you must send environment variable in your request data.
+
+e.g 
+```php
+    $requestBody = [
+        'environment' =>  'sandbox'
+    ];
+```
+How ever this is not required while in production.
+NB. The externalReference must be a valid externalReference that was used for a previous sandbox test transaction. the msisdn and network reference will be null since sandbox transactions are stored temporarily with in our system. 
 
 Author <b> Wandera Timothy Kizito.</b>
 Software Developer<br/>
