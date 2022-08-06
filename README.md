@@ -5,6 +5,19 @@ Version 1.0.0
 ## Authorization. 
 The API utilizes Auth Basic authorization method. This requires you to possess valid API credentials which can be generated from the API Access menu in your wallet account.
 
+# Limits
+Api does not support entry of negative figures , exponential figures e.g e100 , or characters while entering the amount to be transacted.
+For withdrawing money only transactions of 500 Uganda Shillings and Above will be processed.
+For collecting money transactions of every amount are allowed provided the current account balance of the wallet  can meet your charges as defined in your ssentezo agreement.
+Charges are applicable to all transactions as specified in your contract for use of this service,
+# Supported Currencies
+The wallet of writing this documentation supports only Uganda Shillings for transactions.
+
+|ISO Code    | Currency Name                 |  status     |
+|------------|-------------------------------|-------------|
+|   UGX      | Uganda Shillings              |Supported    |
+
+Using unsupported currency codes will result into Unsupported currency error , with HTTP Status Code 500 <br/>.
 ## Setting up  Authorization.
 
 Using your generated API USER and API KEY.  the wallet follows a standard basic auth to secure the api where the Authorization header is sent encoded to base64.
@@ -37,7 +50,9 @@ NB: All requests must contain authorization header.
         'msisdn' => 256770691484,
         'reason' => 'your reason for the transaction',
         'currency' => 'UGX', // should be a valid ISO code and this currency should be supported by your wallet
-        'environment' => 'sandbox'
+        'environment' => 'sandbox',
+        'externalReference' => '{your external reference}',
+        'name' => '{Optional Field  , You may send  the name of the recipient}'
     ];
 
     // with php you can use curl , or Http Request 2 ,or Guzzle Http  to perform this request.
@@ -51,7 +66,8 @@ NB: All requests must contain authorization header.
         "reason" : "your reason for the transaction",
         "currency" : "Valid ISO  format of the currency , Currently UGX is the only currency supported for transactions",
         "environment" : "specify the environment to be utilized \"sandbox\" is the testing environment set the environment property to production or live  to enable transactions ",
-        "externalReference":"This is the string or number or reference that you use to refer to your transaction in your own application. It supports (250) characters"
+        "externalReference":"This is the string or number or reference that you use to refer to your transaction in your own application. It supports (250) characters",
+        "name" : "Name of the recipient "
         }
 ```
 ## Example - Success Response.
@@ -113,7 +129,7 @@ These are the available transaction status that a transaction can have.
     //example request body
 
     $requestBody => [
-        'amount' => 100,
+        'amount' => 1000,
         'msisdn' => 256770691484,
         'reason' => 'your reason for the transaction',
         'currency' => 'UGX', // should be a valid ISO code and this currency should be supported by your wallet
@@ -138,14 +154,7 @@ All responses responses are json encoded strings
     }
 ```
 NB. A PENDING status with HTTP status Code of 202 means the transaction has been initiated and the benefactor must enter their Mobile Money Pin. Once the transaction has succeeded the call back endpoint is then hit using  a <em>POST</em> request to notify you.
-# Supported Currencies
-The wallet of writing this documentation supports only Uganda Shillings for transactions.
 
-|ISO Code    | Currency Name                 |  status     |
-|------------|-------------------------------|-------------|
-|   UGX      | Uganda Shillings              |Supported    |
-
-Using unsupported currency codes will result into Unsupported currency error , with HTTP Status Code 500 <br/>.
 
 Author <b> Wandera Timothy Kizito.</b>
 Software Developer<br/>
