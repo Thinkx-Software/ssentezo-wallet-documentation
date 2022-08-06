@@ -1,5 +1,7 @@
 # Ssentezo Wallet Api Documentation.
 Official Documentation of the ssentezo wallet API
+<br/>
+Version 1.0.0
 ## Authorization. 
 The API utilizes Auth Basic authorization method. This requires you to possess valid API credentials which can be generated from the API Access menu in your wallet account.
 
@@ -135,3 +137,15 @@ All responses responses are json encoded strings
     }
 ```
 NB. A PENDING status with HTTP status Code of 202 means the transaction has been initiated and the benefactor must enter their Mobile Money Pin. Once the transaction has succeeded the call back endpoint is then hit using  a <em>POST</em> request to notify you.
+# Supported Currencies
+The wallet of writing this documentation supports only Uganda Shillings for transactions.
+
+|ISO Code    | Currency Name                 |  status     |
+|------------|-------------------------------|-------------|
+|   UGX      | Uganda Shillings              |Supported    |
+
+Using unsupported currency codes will result into Unsupported currency error , with HTTP Status Code 500 <br/>.
+
+Author <b> Wandera Timothy Kizito.</b>
+Software Developer<br/>
+ThinkXSoftware LTD
