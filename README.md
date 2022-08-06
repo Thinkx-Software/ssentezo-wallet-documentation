@@ -67,7 +67,7 @@ NB: All requests must contain authorization header.
         "currency" : "Valid ISO  format of the currency , Currently UGX is the only currency supported for transactions",
         "environment" : "specify the environment to be utilized \"sandbox\" is the testing environment set the environment property to production or live  to enable transactions ",
         "externalReference":"This is the string or number or reference that you use to refer to your transaction in your own application. It supports (250) characters",
-        "name" : "Name of the recipient "
+        "account_name" : "Name of the recipient "
         }
 ```
 ## Example - Success Response.
@@ -154,6 +154,39 @@ All responses responses are json encoded strings
     }
 ```
 NB. A PENDING status with HTTP status Code of 202 means the transaction has been initiated and the benefactor must enter their Mobile Money Pin. Once the transaction has succeeded the call back endpoint is then hit using  a <em>POST</em> request to notify you.
+
+## Sample of POST data sent using the callback
+```json 
+    {
+        "message": "success",
+        "externalReference" : "2391", 
+        "request_id" :"b997c60c6f445185fcd9a3a595533734" , 
+        "status" : "SUCCEEDED", 
+        "financialTransactionId" : "82929007772"
+        
+    }
+```
+
+
+## Checking Transaction status
+This is a POST request which accepts a parameter of the externalReference which was used while performing the transaction.
+NB: This request must also contain a valid HTTP Authorization Header.
+URL: https://wallet.ssentezo.com/api/get_status/{externalReference} 
+## Sample Response for checking transaction status.
+```json 
+  
+    {
+        "request_id" : "ah28384949r4cc4849r82h",
+        "externalReference" : "3384",
+        "amount": "1000",
+        "reason" : "your transaction reason",
+        "status": "FAILED/SUCCEEDED",
+        "currency": "UGX",
+        "network_ref" : "671199102930 (similar to financialTransactionId)",
+        "msisdn":"256709920188"
+    }
+```
+if an unknown reference was passed in the URL then a 404 http status code is received with errorCode : NOT_FOUND.
 
 
 Author <b> Wandera Timothy Kizito.</b>
