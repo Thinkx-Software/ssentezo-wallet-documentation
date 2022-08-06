@@ -32,6 +32,7 @@ $apiKey = '';
 $encodedString = base64_encode($apiUser .':'.$apiKey);
 
 $header = ['Authorization' => $encodedString];
+$header = ['Content-Type' => "application/form-data"]
 ```
 for other programming languages use follow the permitted syntax respectively.
 
