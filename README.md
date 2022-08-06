@@ -50,7 +50,8 @@ NB: All requests must contain authorization header.
         "msisdn" : "This is a phone  number formatted to international standard",
         "reason" : "your reason for the transaction",
         "currency" : "Valid ISO  format of the currency , Currently UGX is the only currency supported for transactions",
-        "environment" : "specify the environment to be utilized \"sandbox\" is the testing environment set the environment property to production or live  to enable transactions "
+        "environment" : "specify the environment to be utilized \"sandbox\" is the testing environment set the environment property to production or live  to enable transactions ",
+        "externalReference":"This is the string or number or reference that you use to refer to your transaction in your own application. It supports (250) characters"
         }
 ```
 ## Example - Success Response.
