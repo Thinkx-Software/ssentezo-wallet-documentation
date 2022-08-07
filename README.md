@@ -230,19 +230,15 @@ The following is a list of all possible error codes
 |  errorCode  |   Description       |
 |-------------|---------------------|
 |NOT_FOUND    | Transaction not found |
-|-------------|-----------------------|
 |INVALID_CREDENTIALS | wrong username and password were passed in the HTTP_AUTHORIZATION header|
-|--------------|--------------------------------------------------------------------------------|
 |INTERNAL_SERVER_ERROR | There was an internal server error your transaction may or may not be successful|
-|--------------|-----------------------------------------------------------------------------------------|
 |DUPLICATE_REFERENCE| External Reference was already used|
-|-------------------|------------------------------------|
 |UNSPECIFIED_ENVIRONMENT| please specify the environment to process this transaction either "live" or "sandbox"|
-|-----------------------|--------------------------------------------------------------------------------------|
 |INVALID_PARAMETERS| invalid parameters were passed|
-|------------------|-------------------------------|
 |UNSUPPORTED_CURRENCY| An unsupported currency was used |
-|--------------------|----------------------------------|
+
+
+
 Author <b> Wandera Timothy Kizito.</b>
 Software Developer<br/>
 ThinkXSoftware LTD
