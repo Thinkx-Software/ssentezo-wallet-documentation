@@ -236,6 +236,7 @@ The following is a list of all possible error codes
 |UNSPECIFIED_ENVIRONMENT| please specify the environment to process this transaction either "live" or "sandbox"|
 |INVALID_PARAMETERS| invalid parameters were passed|
 |UNSUPPORTED_CURRENCY| An unsupported currency was used |
+|NOT_LIVE| Your account is not live |
 
 
 
