@@ -108,7 +108,7 @@ These are the possible response codes that can be received in the course of the 
 |   401      | No Authorization Header       |
 |   403      | Invalid Credentials           |
 |   500      | An error occurred check the message|
-|   422      |  Unprocessible Entity check the request body|
+|   422      | Unprocessible Entity check the request body|
 
 
 ## Transaction Statuses
@@ -153,7 +153,21 @@ All responses responses are json encoded strings
             "transactionStatus" : "PENDING", 
         }
     }
+
 ```
+## Example - Failure Response
+```json 
+    {
+        "message": "failure",
+        "data" : {
+            "externalReference" : "2391", 
+            "request_id" : "b997c60c6f445185fcd9a3a595533734" , 
+            "transactionStatus" : "FAILED", 
+        }
+    }
+
+```
+
 NB. A PENDING status with HTTP status Code of 202 means the transaction has been initiated and the benefactor must enter their Mobile Money Pin. Once the transaction has succeeded the call back endpoint is then hit using  a <em>POST</em> request to notify you.
 
 ## Sample of POST data sent using the callback
@@ -200,6 +214,35 @@ e.g
 How ever this is not required while in production.
 NB. The externalReference must be a valid externalReference that was used for a previous sandbox test transaction. the msisdn and network reference will be null since sandbox transactions are stored temporarily with in our system. 
 
+## Possible Error Codes
+In case errors have occured both internally or at third party level the api will expose an errorCode.
+sample error e.g 
+```json 
+    {
+        "message": "failure",
+        "data" : null,
+        "errorCode" : "NOT_FOUND"
+    }
+
+```
+The following is a list of all possible error codes
+
+|  errorCode  |   Description       |
+|-------------|---------------------|
+|NOT_FOUND    | Transaction not found |
+|-------------|-----------------------|
+|INVALID_CREDENTIALS | wrong username and password were passed in the HTTP_AUTHORIZATION header|
+|--------------|--------------------------------------------------------------------------------|
+|INTERNAL_SERVER_ERROR | There was an internal server error your transaction may or may not be successful|
+|--------------|-----------------------------------------------------------------------------------------|
+|DUPLICATE_REFERENCE| External Reference was already used|
+|-------------------|------------------------------------|
+|UNSPECIFIED_ENVIRONMENT| please specify the environment to process this transaction either "live" or "sandbox"|
+|-----------------------|--------------------------------------------------------------------------------------|
+|INVALID_PARAMETERS| invalid parameters were passed|
+|------------------|-------------------------------|
+|UNSUPPORTED_CURRENCY| An unsupported currency was used |
+|--------------------|----------------------------------|
 Author <b> Wandera Timothy Kizito.</b>
 Software Developer<br/>
 ThinkXSoftware LTD
