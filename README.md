@@ -238,7 +238,7 @@ The following is a list of all possible error codes
 |UNSUPPORTED_CURRENCY| An unsupported currency was used |
 |NOT_LIVE| Your account is not live |
 |INSUFFICIENT_FUNDS| you do not have enough funds to perform the transaction|
-
+|AMOUNT_LIMIT_ERROR|The amount you entered is greater or lower than the allowed transaction limits|
 
 
 Author <b> Wandera Timothy Kizito.</b>
