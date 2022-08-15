@@ -237,6 +237,7 @@ The following is a list of all possible error codes
 |INVALID_PARAMETERS| invalid parameters were passed|
 |UNSUPPORTED_CURRENCY| An unsupported currency was used |
 |NOT_LIVE| Your account is not live |
+|NOT_ENOUGH_FUNDS| you do not have enough funds to perform the transaction|
 
 
 
