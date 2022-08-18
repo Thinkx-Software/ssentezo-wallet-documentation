@@ -21,6 +21,8 @@ Using unsupported currency codes will result into Unsupported currency error , w
 ## Setting up  Authorization.
 
 Using your generated API USER and API KEY.  the wallet follows a standard basic auth to secure the api where the Authorization header is sent encoded to base64.
+<b>NB:</b> All requests must contain authorization header.
+
 ## Example  - How to encode the string using php
 
 ```php
@@ -35,6 +37,22 @@ $header = ['Authorization' => $encodedString];
 $header = ['Content-Type' => "application/form-data"]
 ```
 for other programming languages use follow the permitted syntax respectively.
+## Checking the account balance
+- Endpoint.  https://wallet.ssentezo.com/api/acc_balance
+- The endpoint above is accessed via the POST method. It does not require a request body but a valid authorization is neccessary.
+<h5>Example response provided the parameters are satisfying. </h5>
+```json
+{
+    "data": {
+        "amount": "2976.000",
+        "formatted": "2,976",
+        "currency": "UGX"
+    },
+    "message": "success"
+}
+```
+In the case of falure an errorCode shall be returned. All possible error codes have been described at the last  section of this documentation.
+
 
 ## Withdrawing Funds from your wallet account.
 
@@ -212,8 +230,7 @@ e.g
     ];
 ```
 How ever this is not required while in production.
-NB. The externalReference must be a valid externalReference that was used for a previous sandbox test transaction. the msisdn and network reference will be null since sandbox transactions are stored temporarily with in our system. 
-
+NB. The externalReference must be a valid externalReference that was used for a previous sandbox test transaction. the msisdn and network reference will be null since sandbox transactions are stored temporarily with in our system.
 ## Possible Error Codes
 In case errors have occured both internally or at third party level the api will expose an errorCode.
 sample error e.g 
