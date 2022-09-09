@@ -1,4 +1,8 @@
 # Ssentezo Wallet Api Documentation.
+
+SignUP
+at 
+https://wallet.ssentezo.com
 Official Documentation of the ssentezo wallet API
 <br/>
 Version 1.0.0
