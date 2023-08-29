@@ -62,11 +62,11 @@ In the case of falure an errorCode shall be returned. All possible error codes h
 
 - Endpoint.  https://wallet.ssentezo.com/api/withdraw
 - The endpoint above is accessed via the POST method with the following request body.
-NB: All requests must contain authorization header.
+NB: All requests must contain an authorization header.
 ## Example - Setting up a withdraw request.
  ```php
-   $testingPhoneNumbers = ['256770691484','256756291975','256778292573'];
-    //example request body
+   $testingPhoneNumbers = ['256770691484', '256756291975', '256778292573'];
+    //Example request body
 
     $requestBody => [
         'amount' => 100,
@@ -75,34 +75,34 @@ NB: All requests must contain authorization header.
         'currency' => 'UGX', // should be a valid ISO code and this currency should be supported by your wallet
         'environment' => 'sandbox',
         'externalReference' => '{your external reference}',
-        'name' => '{Optional Field  , You may send  the name of the recipient}'
+        'name' => '{Optional Field, You may send  the name of the recipient}'
     ];
 
-    // with php you can use curl , or Http Request 2 ,or Guzzle Http  to perform this request.
+    //With php you can use curl, Http Request 2, or Guzzle Http  to perform this request.
     //To mimic responses use the provisioned testingPhoneNumbers  and eth the environment to sandbox.
 ```
 ## Description
 ```json
         {
-        "amount" : "the amount of money being transacted , It should not be formatted  or contain any non numeric items, amounts less or equal to Zero will throw an error ",
-        "msisdn" : "This is a phone  number formatted to international standard",
+        "amount": "the amount of money being transacted, It should not be formatted  or contain any non-numeric items, amounts less or equal to Zero will throw an error ",
+        "msisdn": "This is a phone  number formatted to international standard",
         "reason" : "your reason for the transaction",
-        "currency" : "Valid ISO  format of the currency , Currently UGX is the only currency supported for transactions",
-        "environment" : "specify the environment to be utilized \"sandbox\" is the testing environment set the environment property to production or live  to enable transactions ",
+        "currency": "Valid ISO  format of the currency, Currently UGX is the only currency supported for transactions",
+        "environment": "specify the environment to be utilized \"sandbox\" is the testing environment set the environment property to production or live  to enable transactions ",
         "externalReference":"This is the string or number or reference that you use to refer to your transaction in your own application. It supports (250) characters",
-        "account_name" : "Name of the recipient "
+        "account_name": "Name of the recipient "
         }
 ```
 ## Example - Success Response.
-All responses responses are json encoded strings
+All responses responses are JSON-encoded strings
 ```json 
     {
         "message": "success",
-        "data" : {
+        "data": {
             "externalReference" : "2391", 
             "request_id" : "b997c60c6f445185fcd9a3a595533734" , 
-            "transactionStatus" : "SUCCEEDED", 
-            "financialTransactionId" : "12282913328"  
+            "transactionStatus": "SUCCEEDED", 
+            "financialTransactionId": "12282913328"  
         }
     }
 ```
@@ -111,11 +111,11 @@ NB: The financialTransactionId  is the transaction reference from the Network se
 ```json 
     {
         "message": "failed",
-        "data" : {
+        "data": {
             "externalReference" : "2381", 
             "request_id" : "b997c60c6f445185fcd9a3a595533734" , 
-            "transactionStatus" : "FAILED", 
-            "financialTransactionId" : ""  
+            "transactionStatus": "FAILED", 
+            "financialTransactionId": ""  
         }
     }
 ```
@@ -129,12 +129,12 @@ These are the possible response codes that can be received in the course of the 
 |   400      | Failed Transaction            |
 |   401      | No Authorization Header       |
 |   403      | Invalid Credentials           |
-|   500      | An error occurred check the message|
-|   422      | Unprocessible Entity check the request body|
+|   500      | An error occurred to check the message|
+|   422      | Unprocessable Entity check the request body|
 
 
 ## Transaction Statuses
-These are the available transaction status that a transaction can have.
+These are the available transaction statuses that a transaction can have.
 
 |Status | Description                                                         |
 |-------------|---------------------------------------------------------------|
@@ -148,8 +148,8 @@ These are the available transaction status that a transaction can have.
 - The endpoint above is accessed via the POST method with the following request body.
 ## Example - Setting up a collection request.
  ```php
-   $testingPhoneNumbers = ['256770691484','256756291975','256778292573'];
-    //example request body
+   $testingPhoneNumbers = ['256770691484', '256756291975', '256778292573'];
+    //Example request body
 
     $requestBody => [
         'amount' => 1000,
@@ -161,18 +161,18 @@ These are the available transaction status that a transaction can have.
         'account_name' => '(Optional)' //A persons name you are collecting from
     ];
 
-    // with php you can use curl , or Http Request 2 ,or Guzzle Http  to perform this request.
+    //With php you can use curl, Http Request 2, or Guzzle Http  to perform this request.
     //To mimic responses use the provisioned testingPhoneNumbers  and eth the environment to sandbox.
 ```
 ## Example - Success Response.
-All responses responses are json encoded strings
+All responses are JSON-encoded strings
 ```json 
     {
         "message": "success",
-        "data" : {
-            "externalReference" : "2391", 
+        "data": {
+            "externalReference": "2391", 
             "request_id" : "b997c60c6f445185fcd9a3a595533734" , 
-            "transactionStatus" : "PENDING", 
+            "transactionStatus": "PENDING", 
         }
     }
 
@@ -181,25 +181,25 @@ All responses responses are json encoded strings
 ```json 
     {
         "message": "failure",
-        "data" : {
-            "externalReference" : "2391", 
+        "data": {
+            "externalReference": "2391", 
             "request_id" : "b997c60c6f445185fcd9a3a595533734" , 
-            "transactionStatus" : "FAILED", 
+            "transactionStatus": "FAILED", 
         }
     }
 
 ```
 
-NB. A PENDING status with HTTP status Code of 202 means the transaction has been initiated and the benefactor must enter their Mobile Money Pin. Once the transaction has succeeded the call back endpoint is then hit using  a <em>POST</em> request to notify you.
+NB. A PENDING status with an HTTP status code of 202 means the transaction has been initiated and the benefactor must enter their Mobile Money Pin. Once the transaction has succeeded the callback endpoint is then hit using  a <em>POST</em> request to notify you.
 
 ## Sample of POST data sent using the callback
 ```json 
     {
         "message": "success",
-        "externalReference" : "2391", 
+        "externalReference": "2391", 
         "request_id" :"b997c60c6f445185fcd9a3a595533734" , 
         "status" : "SUCCEEDED", 
-        "financialTransactionId" : "82929007772"
+        "financialTransactionId": "82929007772"
         
     }
 ```
@@ -214,18 +214,18 @@ URL: https://wallet.ssentezo.com/api/get_status/{externalReference}
   
     {
         "request_id" : "ah28384949r4cc4849r82h",
-        "externalReference" : "3384",
+        "externalReference": "3384",
         "amount": "1000",
-        "reason" : "your transaction reason",
+        "reason": "your transaction reason",
         "status": "FAILED/SUCCEEDED",
         "currency": "UGX",
-        "network_ref" : "671199102930 (similar to financialTransactionId)",
+        "network_ref": "671199102930 (similar to financialTransactionId)",
         "msisdn":"256709920188"
     }
 ```
-if an unknown reference was passed in the URL then a 404 http status code is received with errorCode : NOT_FOUND.
+if an unknown reference was passed in the URL then a 404 HTTP status code is received with errorCode: NOT_FOUND.
 
-Incase you are in the sandbox environment you must send environment variable in your request data.
+In case you are in the sandbox environment you must send the environment variable in your request data.
 
 e.g 
 ```php
@@ -233,16 +233,16 @@ e.g
         'environment' =>  'sandbox'
     ];
 ```
-How ever this is not required while in production.
-NB. The externalReference must be a valid externalReference that was used for a previous sandbox test transaction. the msisdn and network reference will be null since sandbox transactions are stored temporarily with in our system.
+However, this is not required while in production.
+NB. The externalReference must be a valid externalReference that was used for a previous sandbox test transaction. the msisdn and network reference will be null since sandbox transactions are stored temporarily within our system.
 ## Possible Error Codes
-In case errors have occured both internally or at third party level the api will expose an errorCode.
+In case errors have occurred both internally or at the third-party level the API will expose an errorCode.
 sample error e.g 
 ```json 
     {
         "message": "failure",
-        "data" : null,
-        "errorCode" : "NOT_FOUND"
+        "data": null,
+        "errorCode": "NOT_FOUND"
     }
 
 ```
@@ -251,15 +251,17 @@ The following is a list of all possible error codes
 |  errorCode  |   Description       |
 |-------------|---------------------|
 |NOT_FOUND    | Transaction not found |
-|INVALID_CREDENTIALS | wrong username and password were passed in the HTTP_AUTHORIZATION header|
+|INVALID_CREDENTIALS | The wrong username and password were passed in the HTTP_AUTHORIZATION header|
 |INTERNAL_SERVER_ERROR | There was an internal server error your transaction may or may not be successful|
 |DUPLICATE_REFERENCE| External Reference was already used|
-|UNSPECIFIED_ENVIRONMENT| please specify the environment to process this transaction either "live" or "sandbox"|
+|UNSPECIFIED_ENVIRONMENT| Please specify the environment to process this transaction either "live" or "sandbox"|
 |INVALID_PARAMETERS| invalid parameters were passed|
 |UNSUPPORTED_CURRENCY| An unsupported currency was used |
 |NOT_LIVE| Your account is not live |
-|INSUFFICIENT_FUNDS| you do not have enough funds to perform the transaction|
+|INSUFFICIENT_FUNDS| You do not have enough funds to perform the transaction|
 |AMOUNT_LIMIT_ERROR|The amount you entered is greater or lower than the allowed transaction limits|
+|INVALID_PHONE_NUMBER|PhoneNumber You provided is not valid|
+|UNSUPPORTED_NETWORK_OR_INVALID_PHONE_NUMBER| The phone number may be invalid or it not an MTN or Airtel phone number|
 
 
 Author <b> Wandera Timothy Kizito.</b>
