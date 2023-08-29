@@ -235,6 +235,19 @@ e.g
 ```
 However, this is not required while in production.
 NB. The externalReference must be a valid externalReference that was used for a previous sandbox test transaction. the msisdn and network reference will be null since sandbox transactions are stored temporarily within our system.
+
+## Account Verification
+This is a POST request which accepts a parameter of the phoneNumber.
+NB: This request must also contain a valid HTTP Authorization Header.
+URL: https://wallet.ssentezo.com/api/verify_msisdn 
+## Sample Request Body.
+```json 
+  
+    {
+        "phoneNumber" : "256709920188",
+    }
+```
+
 ## Possible Error Codes
 In case errors have occurred both internally or at the third-party level the API will expose an errorCode.
 sample error e.g 
