@@ -44,6 +44,12 @@ for other programming languages use follow the permitted syntax respectively.
 ## Checking the account balance
 - Endpoint.  https://wallet.ssentezo.com/api/acc_balance
 - The endpoint above is accessed via the POST method. It does not require a request body but a valid authorization is neccessary.
+<h5>Example Request   </h5>
+```json
+{
+    "currency": "UGX"
+}
+```
 <h5>Example response provided the parameters are satisfying. </h5>
 ```json
 {
