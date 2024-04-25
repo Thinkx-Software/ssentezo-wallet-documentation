@@ -106,7 +106,7 @@ These are the available transaction statuses that a transaction can have.
 
 #### API Request Responses
 
-##### Successful Requests
+##### Successful Responses
 
 For successful requests, json object response is sent back containing two keys and these are;
 
@@ -116,7 +116,7 @@ For successful requests, json object response is sent back containing two keys a
 <b>response</b>: This has a value of <b>OK</b>.
 This indicates that the request was processed successfully.
 
-<b>data</b>: This is an object that holds any relevant data that should be returns as per the endpoint called.
+<b>data</b>: This is an object that holds any relevant data that should be returned as per the endpoint called.
 
 Example:
 
@@ -131,27 +131,26 @@ Example:
 }
 ```
 
-##### Successful Requests
+##### Erroneous Responses
 
-For successful requests, json object response is sent back containing two keys and these are;
+For erroneous responses, json object response is sent back containing two keys and these are;
 
 -   response
--   data
+-   error
 
-<b>response</b>: This has a value of <b>OK</b>.
-This indicates that the request was processed successfully.
+<b>response</b>: This has a value of <b>ERROR</b>.
+This indicates that there was an error during the course of the request.
 
-<b>data</b>: This is an object that holds any relevant data that should be returns as per the endpoint called.
+<b>error</b>: This is an object that holds any relevant data to the error that just occurred.
+It always contains a message property that describes the error and may also have other properties relevant to that error.
 
 Example:
 
 ```json
 {
-    "response": "OK",
-    "data": {
-        "amount": 1834665,
-        "formatted": "1,834,665",
-        "currency": "UGX"
+    "response": "ERROR",
+    "error": {
+        "message": "The currency field is required."
     }
 }
 ```
