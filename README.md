@@ -263,6 +263,8 @@ The endpoint above is accessed via the POST method. It does not require a reques
 -   currency
 -   reason
 -   name (Optional)
+-   success_callback (Optional)
+-   failure_callback (Optional)
 
 #### Example request body
 
@@ -275,7 +277,9 @@ The endpoint above is accessed via the POST method. It does not require a reques
        'amount' => 2000,
        'currency' => 'UGX', // should be a valid ISO code and this currency should be supported by your wallet
        'reason' => 'Your reason for the transaction',
-       'name' => '{Optional Field, You may send  the name of the recipient}'
+       'name' => '{Optional Field, You may send  the name of the recipient}',
+       'success_callback' => 'https://yourapp.com/my-success-callback (Optional)', // A POST endpoint the wallet will call when a transaction is successful
+       'failure_callback' => 'https://yourapp.com/my-failure-callback (Optional)', // A POST endpoint the wallet will call when a transaction has failed
    ];
 
    //With php you can use curl, Http Request 2, or Guzzle Http  to perform this request.
@@ -290,7 +294,9 @@ The endpoint above is accessed via the POST method. It does not require a reques
     "amount": "The amount of money being transacted. It should not be formatted or contain any non-numeric characters. Amount should be between UGX 500 to UGX 7000000",
     "currency": "Valid ISO  format of the currency. Currently UGX is the only currency supported for transactions",
     "reason": "Your reason for the transaction",
-    "name": "Name of the recipient"
+    "name": "Name of the recipient",
+    "success_callback": "A POST endpoint the wallet will call when a transaction is successful",
+    "failure_callback": "A POST endpoint the wallet will call when a transaction has failed"
 }
 ```
 
@@ -432,7 +438,7 @@ The endpoint above is accessed via the POST method. It does not require a reques
 }
 ```
 
-### Checking Transaction status
+### Checking for a Transaction status
 
 -   <b>Endpoint</b>: https://wallet.ssentezo.com/api/get_status/{externalReference}
 -   <b>Method</b>: POST
@@ -459,6 +465,23 @@ The endpoint above is accessed via the POST method. It does not require a reques
     }
 }
 ```
+
+<br/>
+
+### Receiving a Transaction status Notification
+
+If you would like your system to be notified immediately after a transaction status changes from the <b>PENDING</b> status into either <b>SUCCEEDED</b> or <b>FAILED</b> statuses, you can pass specify callback URLs that we shall hit in order to notify your system.
+
+When making a deposit or withdraw request, as part of your request data, you can pass two parameters;
+
+-   <b>success_callback</b>
+-   <b>failure_callback</b>
+
+These should contain valid URLs that will be called using a <b>POST</b> request to your system when a transaction either succeeds or fails. Check the documentation section for <b>DEPOSIT</b> or <b>WITHDRAW</b> for an example.
+
+<b>NOTE 1</b>: Please ensure that you provide valid and resolvable URLs to your system. If our system is unable to resolve your endpoint within <b>5 seconds</b>, the request will timeout. In such cases, you will need to check the transaction status as described above.
+
+<b>NOTE 2</b>: Please ensure that this endpoint is publicly accessible and does not require any authentication or authorization. This is because our system is decoupled from your implementation, and we rely on unrestricted callback requests to function correctly.
 
 <br/>
 
